@@ -1,3 +1,4 @@
+"https://api.jamendo.com/v3.0/users/artists/?client_id=d79377aa&format=jsonpretty&limit=200&name=claudod",
 {
   "headers": {
     "status": "success",

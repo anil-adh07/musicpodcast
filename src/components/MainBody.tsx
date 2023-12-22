@@ -1,40 +1,40 @@
 import { useEffect, useState } from "react";
 import ArtistBox from "./ArtistBox";
+import SearchBox from "./SearchBox";
+import MessageBox from "./MessageBox";
 
 const MainBody = () => {
   const [artists, setArtists] = useState([]);
 
   const getData = async () => {
-    let url = 'https://api.jamendo.com/v3.0/users/artists/?client_id=d79377aa&format=jsonpretty&limit=200&name=claudod'
-    let data = await fetch(url);
-    let parsedData = await data.json();
+    const url: string =
+      "https://api.jamendo.com/v3.0/users/artists/?client_id=d79377aa&format=jsonpretty&limit=200&name=claudod";
+    const data = await fetch(url);
+    const parsedData = await data.json();
     setArtists(parsedData.results[0].artists);
-    console.log("Parsed Data:");
-    console.log(parsedData);
-    console.log("Only artists")
-    console.log(artists);
-  }
+  };
 
   useEffect(() => {
     getData();
-
   }, []);
 
   return (
     <>
-      {artists.map((element, index) => {
-        return (<div className="artistbox ">
-          <div className="columns-1 sm:columns-2 md:columns-3 flex" key={index}>
-
-            <ArtistBox imgUrl={element['image']} />
-
-          </div>
-        </div >
-        )
-      })}
-
+      <SearchBox />
+      <div className="flex flex-wrap pl-6 pb-3">
+        {artists.map((element, index) => {
+          return (
+            <div className="w-full sm:w-1/2 md:w-1/4 xl:1/5" key={index}>
+              <ArtistBox
+                imgUrl={element["image"]}
+                artistName={element["name"]}
+              />
+            </div>
+          );
+        })}
+      </div>
+      <MessageBox />
     </>
   );
-
 };
 export default MainBody;

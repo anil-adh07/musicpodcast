@@ -1,7 +1,12 @@
 import { useState } from "react";
-import PropTypes from 'prop-types'
+import { Link } from "react-router-dom";
 
-export default function ArtistBox(props) {
+interface ArtistBoxProps {
+  imgUrl: string;
+  artistName: string;
+}
+
+export default function ArtistBox({ imgUrl, artistName }: ArtistBoxProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -9,31 +14,38 @@ export default function ArtistBox(props) {
   };
   const handleMouseleave = () => {
     setIsHovered(false);
-  }
-  let { imgUrl } = props;
+  };
   return (
     <>
       <div className="artistbox">
-        <div className="columns-1 sm:columns-2 md:columns-3">
-          <div className=" ml-10 mr-10 mb-5 hover:cursor-pointer text-white " onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseleave}>
-            <a href="">
-              <div className="relative">
-                <img className={`rounded-2xl w-auto h-auto ${isHovered ? 'opacity-50' : 'opacity-100'}`} src={imgUrl} alt=""></img>
-                <div className={`absolute top-3/4 left-1/4 ${isHovered ? "" : 'hidden'}`}>
-                  <span className=" text-3xl font-bold z-20">Artist Name</span>
-                </div>
+        <div
+          className="hover:cursor-pointer text-white"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseleave}
+        >
+          <Link to="/artistProfile">
+            <div className="relative mr-5 mb-5">
+              <span className="absolute top-8 left-8 font-bold uppercase text-lg text-cyan-400 tracking-wide">
+                Artist
+              </span>
+              <img
+                className={`rounded-2xl w-full h-96 ${
+                  isHovered ? "opacity-50" : "opacity-100"
+                }`}
+                src={imgUrl}
+                alt=""
+              ></img>
+              <div
+                className={`absolute top-72 left-8 ${
+                  isHovered ? "" : "hidden"
+                }`}
+              >
+                <span className=" text-2xl font-bold z-20">{artistName}</span>
               </div>
-            </a>
-          </div>
-        </div >
-      </div >
+            </div>
+          </Link>
+        </div>
+      </div>
     </>
   );
-}
-ArtistBox.propTypes = {
-  imgUrl: PropTypes.string.isRequired,
-}
-
-ArtistBox.defaultProps = {
-  imgUrl: "images/img2.webp",
 }
