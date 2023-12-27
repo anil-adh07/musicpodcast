@@ -8,7 +8,7 @@ const MainBody = () => {
 
   const getData = async () => {
     const url: string =
-      "https://api.jamendo.com/v3.0/users/artists/?client_id=d79377aa&format=jsonpretty&limit=200&name=claudod";
+      "https://api.jamendo.com/v3.0/users/artists/?client_id=d79377aa&fullcount=true&format=jsonpretty&limit=200&name=claudod";
     const data = await fetch(url);
     const parsedData = await data.json();
     setArtists(parsedData.results[0].artists);
@@ -28,6 +28,7 @@ const MainBody = () => {
               <ArtistBox
                 imgUrl={element["image"]}
                 artistName={element["name"]}
+                joinedDate={element["joindate"]}
               />
             </div>
           );

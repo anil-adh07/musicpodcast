@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  .tracksConatinerHeight {
+    @apply max-h-[30rem];
+  }
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .tracksConatinerHeight::-webkit-scrollbar {
+    @apply hidden;
+  }
+}
+
+@layer utilities {
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .tracksConatinerHeight {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}

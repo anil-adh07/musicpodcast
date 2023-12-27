@@ -1,4 +1,4 @@
-"https: //api.jamendo.com/v3.0/artists/tracks/?client_id=d79377aa&format=jsonpretty&order=track_name_desc&name=Artist_name&album_datebetween=0000-00-00_2012-01-01",
+"https: //api.jamendo.com/v3.0/artists/tracks/?client_id=d79377aa&format=jsonpretty&order=track_name_desc&name=Suerte&album_datebetween=0000-00-00_2012-01-01",
 {
   "headers": {
     "status": "success",
