@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { FaShuffle } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import Markdown from "markdown-to-jsx";
 
 interface TracksProps {
-  artistName: string;
+  artistId: string;
 }
-export default function Tracks({ artistName }: TracksProps) {
+export default function Tracks({ artistId }: TracksProps) {
   const [tracks, setTracks] = useState([]);
 
   const getTracks = async () => {
-    const url: string = `https://api.jamendo.com/v3.0/artists/tracks/?client_id=d79377aa&format=jsonpretty&order=track_name_desc&name=${artistName}&album_datebetween=0000-00-00_2012-01-01`;
+    const url: string = `https://api.jamendo.com/v3.0/artists/tracks?client_id=657a51aa&format=jsonpretty&imagesize=600&order=track_name_desc&id=${artistId}`;
     const data = await fetch(url);
     const parsedData = await data.json();
     setTracks(parsedData.results[0].tracks);
@@ -60,10 +61,10 @@ export default function Tracks({ artistName }: TracksProps) {
                           </li>
                           <li>
                             <div className="ml-3 text-2xl">
-                              <span>{element["album_name"]}</span>
+                              <Markdown>{element["album_name"]}</Markdown>
                             </div>
                             <div className="ml-3 text-sm">
-                              <span>{element["name"]}</span>
+                              <Markdown>{element["name"]}</Markdown>
                             </div>
                           </li>
                         </div>

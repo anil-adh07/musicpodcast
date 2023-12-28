@@ -30,9 +30,8 @@ const MusicPlayer = () => {
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
   const tracks = (location.state as { tracks: Track[] })?.tracks || [];
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(
-    findAlbumIndex(tracks, id)
-  );
+  const [currentTrackIndex, setCurrentTrackIndex] =
+    useState(findAlbumIndex(tracks, id)) || 0;
   const [isPlaying, setIsPlaying] = useState(true);
   const [volume, setVolume] = useState(0.5);
   const [isMuted, setIsMuted] = useState(false);
@@ -53,6 +52,7 @@ const MusicPlayer = () => {
   useEffect(() => {
     audioRef.current?.addEventListener("ended", () => {
       nextTrack();
+      console.log(currentTrackIndex);
     });
   }, [currentTrackIndex]);
 
@@ -175,7 +175,10 @@ const MusicPlayer = () => {
             ref={audioRef}
             src={tracks[currentTrackIndex].audio}
             onTimeUpdate={handleTimeUpdate}
-          />
+          >
+            Your browser does not support the audio element.
+          </audio>
+
           <div className="flex items-center justify-center mt-6">
             <span className="mr-4 text-white">{formatTime(currentTime)}</span>
             <input

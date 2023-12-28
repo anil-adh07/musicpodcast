@@ -3,11 +3,19 @@ import { Link } from "react-router-dom";
 import Markdown from "markdown-to-jsx";
 
 interface ArtistBoxProps {
+  id: string;
   imgUrl: string;
   artistName: string;
   joinedDate: string;
 }
+interface ArtistData {
+  artistid: string;
+  imgurl: string;
+  artistname: string;
+  joineddate: string;
+}
 export default function ArtistBox({
+  id,
   imgUrl,
   artistName,
   joinedDate,
@@ -21,7 +29,14 @@ export default function ArtistBox({
     setIsHovered(false);
   };
 
-  const id: number = 1;
+  const artistData: ArtistData[] = [
+    {
+      artistid: id,
+      imgurl: imgUrl,
+      artistname: artistName,
+      joineddate: joinedDate,
+    },
+  ];
   return (
     <>
       <div className="artistbox">
@@ -30,33 +45,36 @@ export default function ArtistBox({
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseleave}
         >
-          <div>
-            <Link
-              to={`/artistProfile/${id}?name=${artistName}&imageUrl=${imgUrl}&joinedDate=${joinedDate}`}
-            >
-              <div className="relative mr-5 mb-5">
-                <span className="absolute top-8 left-8 font-bold uppercase text-lg text-cyan-400 tracking-wide">
-                  Artist
-                </span>
-                <img
-                  className={`rounded-2xl w-full h-96 object-cover ${
-                    isHovered ? "opacity-50" : "opacity-100"
-                  }`}
-                  src={imgUrl}
-                  alt=""
-                ></img>
-                <div
-                  className={`absolute top-72 left-8 ${
-                    isHovered ? "" : "hidden"
-                  }`}
-                >
-                  <Markdown className=" text-2xl font-bold z-20">
-                    {artistName}
-                  </Markdown>
+          {artistData.map((artist) => (
+            <div>
+              <Link
+                to={`/artistProfile/${artist.artistid}`}
+                state={{ artistData }}
+              >
+                <div className="relative mr-5 mb-5">
+                  <span className="absolute top-8 left-8 font-bold uppercase text-lg text-cyan-400 tracking-wide">
+                    Artist
+                  </span>
+                  <img
+                    className={`rounded-2xl w-full h-96 object-cover ${
+                      isHovered ? "opacity-50" : "opacity-100"
+                    }`}
+                    src={imgUrl}
+                    alt=""
+                  ></img>
+                  <div
+                    className={`absolute bottom-0 left-9 w-full overflow-hidden transition-all duration-500 ${
+                      isHovered ? "h-24" : "h-0"
+                    }`}
+                  >
+                    <Markdown className=" text-2xl font-bold z-20 ">
+                      {artistName}
+                    </Markdown>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          </div>
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
     </>
