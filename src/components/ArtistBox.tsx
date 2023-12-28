@@ -1,18 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Markdown from "markdown-to-jsx";
 
 interface ArtistBoxProps {
   imgUrl: string;
   artistName: string;
   joinedDate: string;
 }
-interface dataArray {
-  id: number;
-  name: string;
-  image: string;
-  j_date: string;
-}
-
 export default function ArtistBox({
   imgUrl,
   artistName,
@@ -27,10 +21,7 @@ export default function ArtistBox({
     setIsHovered(false);
   };
 
-  const dataArray: dataArray[] = [
-    { id: 1, name: artistName, image: imgUrl, j_date: joinedDate },
-  ];
-
+  const id: number = 1;
   return (
     <>
       <div className="artistbox">
@@ -39,35 +30,33 @@ export default function ArtistBox({
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseleave}
         >
-          {dataArray.map((artist, index) => (
-            <div key={index}>
-              <Link
-                to={`/artistProfile/${artist.id}?name=${artist.name}&imageUrl=${artist.image}&joinedDate=${artist.j_date}`}
-              >
-                <div className="relative mr-5 mb-5">
-                  <span className="absolute top-8 left-8 font-bold uppercase text-lg text-cyan-400 tracking-wide">
-                    Artist
-                  </span>
-                  <img
-                    className={`rounded-2xl w-full h-96 object-cover ${
-                      isHovered ? "opacity-50" : "opacity-100"
-                    }`}
-                    src={imgUrl}
-                    alt=""
-                  ></img>
-                  <div
-                    className={`absolute top-72 left-8 ${
-                      isHovered ? "" : "hidden"
-                    }`}
-                  >
-                    <span className=" text-2xl font-bold z-20">
-                      {artistName}
-                    </span>
-                  </div>
+          <div>
+            <Link
+              to={`/artistProfile/${id}?name=${artistName}&imageUrl=${imgUrl}&joinedDate=${joinedDate}`}
+            >
+              <div className="relative mr-5 mb-5">
+                <span className="absolute top-8 left-8 font-bold uppercase text-lg text-cyan-400 tracking-wide">
+                  Artist
+                </span>
+                <img
+                  className={`rounded-2xl w-full h-96 object-cover ${
+                    isHovered ? "opacity-50" : "opacity-100"
+                  }`}
+                  src={imgUrl}
+                  alt=""
+                ></img>
+                <div
+                  className={`absolute top-72 left-8 ${
+                    isHovered ? "" : "hidden"
+                  }`}
+                >
+                  <Markdown className=" text-2xl font-bold z-20">
+                    {artistName}
+                  </Markdown>
                 </div>
-              </Link>
-            </div>
-          ))}
+              </div>
+            </Link>
+          </div>
         </div>
       </div>
     </>

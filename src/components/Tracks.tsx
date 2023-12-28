@@ -42,7 +42,10 @@ export default function Tracks({ artistName }: TracksProps) {
                 key={index}
               >
                 <div>
-                  <Link to={"/musiclpayer"}>
+                  <Link
+                    to={`/musiclpayer/${element["album_id"]}`}
+                    state={{ tracks }}
+                  >
                     <ul className=" hover:bg-neutral-700 hover:cursor-pointer rounded-lg">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center">

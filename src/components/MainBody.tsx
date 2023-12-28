@@ -20,21 +20,29 @@ const MainBody = () => {
 
   return (
     <>
-      <SearchBox />
-      <div className="flex flex-wrap pl-6 pb-3">
-        {artists.map((element, index) => {
-          return (
-            <div className="w-full sm:w-1/2 md:w-1/4 xl:1/5" key={index}>
-              <ArtistBox
-                imgUrl={element["image"]}
-                artistName={element["name"]}
-                joinedDate={element["joindate"]}
-              />
-            </div>
-          );
-        })}
+      <div className="h-ful bg-black p-4">
+        <div className="bg-[#171717]  rounded-2xl">
+          <SearchBox />
+          <div className="flex flex-wrap pl-6 pb-3">
+            {artists.map((element, index) => {
+              return (
+                <div className="w-full sm:w-1/2 md:w-1/4 xl:1/5" key={index}>
+                  <ArtistBox
+                    imgUrl={
+                      (element["image"] as string[]).length
+                        ? element["image"]
+                        : `https://source.unsplash.com/600x600?${element["name"]}+music`
+                    }
+                    artistName={element["name"]}
+                    joinedDate={element["joindate"]}
+                  />
+                </div>
+              );
+            })}
+          </div>
+          <MessageBox />
+        </div>
       </div>
-      <MessageBox />
     </>
   );
 };
