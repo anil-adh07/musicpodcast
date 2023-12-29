@@ -9,7 +9,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<MainBody />} />
         <Route path="/artistProfile/:id" element={<ArtistProfile />} />
-        <Route path="/musiclpayer/:id" element={<AudioPlayer />} />
+        <Route path="/musicplayer/:id" element={<AudioPlayer />} />
       </Routes>
     </>
   );

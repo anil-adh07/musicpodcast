@@ -46,7 +46,7 @@ export default function ArtistBox({
           onMouseLeave={handleMouseleave}
         >
           {artistData.map((artist) => (
-            <div>
+            <div key={artist.artistid}>
               <Link
                 to={`/artistProfile/${artist.artistid}`}
                 state={{ artistData }}
@@ -56,7 +56,7 @@ export default function ArtistBox({
                     Artist
                   </span>
                   <img
-                    className={`rounded-2xl w-full h-96 object-cover ${
+                    className={`rounded-2xl w-full h-80 object-cover ${
                       isHovered ? "opacity-50" : "opacity-100"
                     }`}
                     src={imgUrl}

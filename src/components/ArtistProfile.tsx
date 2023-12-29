@@ -17,17 +17,17 @@ export default function ArtistProfile() {
   return (
     <>
       <div className="h-ful bg-black p-4">
-        <div className="bg-[#171717]  rounded-2xl">
+        <div className="bg-[#171717]  rounded-2xl p-5">
           {artistData.map((artist) => (
             <>
-              <div className="text-white p-5">
+              <div className="text-white  ml-4 hover:ml-2">
                 <Link to="/">
                   <BackArrow />
                 </Link>
               </div>
 
-              <div className="artistProfile pb-3 pl-5 flex-row md:flex items-center">
-                <div className="profileImage  ">
+              <div className="artistProfile  pb-3 pl-5 mt-4 flex-row md:flex items-center">
+                <div className="profileImage ">
                   <img
                     className="rounded-full w-24 h-24 sm:w-32 sm:h-32 md:w-44 md:h-44 object-cover"
                     src={artist.imgurl?.toString()}
@@ -40,7 +40,7 @@ export default function ArtistProfile() {
                   </div>
                   <div className="text-xl mt-3">
                     <span>
-                      Joined <b>{artist.joineddate}</b>
+                      Joined on <b>{artist.joineddate}</b>
                     </span>
                   </div>
                 </div>

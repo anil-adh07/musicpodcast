@@ -1,4 +1,7 @@
-export default function SearchBox() {
+interface SearchBoxProps {
+  onSearchChange: (searchTerm: string) => void;
+}
+export default function SearchBox({ onSearchChange }: SearchBoxProps) {
   return (
     <>
       <div className="topcontent p-7 ">
@@ -37,15 +40,9 @@ export default function SearchBox() {
                   id="default-search"
                   className="block w-full p-3 ps-10 text-neutral-100  rounded-lg bg-neutral-800 focus:outline-none ring-2 ring-neutral-800  focus:ring-neutral-600"
                   placeholder="  Search for artists"
+                  onChange={(e) => onSearchChange(e.target.value)}
                   required
                 />
-                <button
-                  type="submit"
-                  className="text-white absolute end-4 bottom-[0.4rem] bg-[#0f0e0e] hover:bg-white hover:text-black  
-                font-medium rounded-lg text-sm p-2"
-                >
-                  Search
-                </button>
               </div>
             </form>
           </span>

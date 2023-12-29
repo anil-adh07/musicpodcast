@@ -52,13 +52,13 @@ const MusicPlayer = () => {
   useEffect(() => {
     audioRef.current?.addEventListener("ended", () => {
       nextTrack();
-      console.log(currentTrackIndex);
     });
   }, [currentTrackIndex]);
 
   const handleBackpage = () => {
     navigate(-1);
   };
+
   function findAlbumIndex(tracks: Track[], albumId?: string): number {
     for (let i = 0; i < tracks.length; i++) {
       if (tracks[i].album_id === albumId) {
